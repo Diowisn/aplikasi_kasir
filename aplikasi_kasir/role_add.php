@@ -2,13 +2,13 @@
 
 include 'config.php';
 session_start();
-include 'authcheck.php';
+// include 'authcheck.php';
 
 if (isset($_POST['simpan'])) {
     $nama = $_POST['nama']; 
     
     // menyimpan data
-    mysqli_query($dbconnect, "insert into role values ('', '$nama')");
+    mysqli_query($dbconnect, "INSERT INTO jabatan VALUES ('', '$nama')");
 
     $_SESSION['success'] = 'Berhasil menambahkan data!';
 
@@ -29,23 +29,15 @@ if (isset($_POST['simpan'])) {
 </head>
 <body>
     <div class="container">
-        <h1>Tambah Barang</h1>
-        <form action="post">
+        <h1>Tambah Role</h1>
+        <form method="post">
             <div class="form-group">
-                <label for="">Nama Barang</label>
-                <input type="text" name="nama" class="form-control" placeholder="Nama Barang">
-            </div>
-            <div class="form-group">
-                <label for="">Harga</label>
-                <input type="number" name="harga" class="form-control" placeholder="Harga Barang">
-            </div>
-            <div class="form-group">
-                <label for="">Jumlah Stock</label>
-                <input type="number" name="jumlah" class="form-control" placeholder="Jumlah Stock">
+                <label for="">Nama</label>
+                <input type="text" name="nama" class="form-control" placeholder="Nama">
             </div>
 
             <input type="submit" name="simpan" value="Simpan" class="btn btn-primary">
-            <a href="/barang.php" class="btn btn-warning">Kembali</a>
+            <a href="role.php" class="btn btn-warning">Kembali</a>
         </form>        
     </div>
 </body>

@@ -1,5 +1,4 @@
 <?php
-
 include 'config.php';
 session_start();
 
@@ -8,10 +7,10 @@ if (isset($_POST['masuk']))
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $query = mysqli_query($dbconnect, "select * from user where username='$username', password='$password'");
+    $query = mysqli_query($dbconnect, "SELECT * FROM user WHERE username='$username' AND sandi='$password'");
 
     // mendapatkan hasil dari data
-    $data = mysqli_fecth_assoc($query);
+    $data = mysqli_fetch_assoc($query);
 
     // mendapatkan nilai jumlah data
     $check = mysqli_num_rows($query);
@@ -19,12 +18,12 @@ if (isset($_POST['masuk']))
     if (!$check) {
         $_SESSION['error'] = 'Username dan password salah';
     }
-    elsse {
+    else {
         $_SESSION['userid'] = $data['id_user'];
         $_SESSION['nama'] = $data['nama'];
         $_SESSION['role_id'] = $data['role_id'];
 
-        header("location: index.php")
+        header("location: index.php");
     }
 }
 ?>
@@ -58,8 +57,8 @@ if (isset($_POST['masuk']))
                 <input type="text" class="form-control" name="username" placeholder="Username">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword">Password</label>
-                <input type="password" class="form-control" name="password" placeholder="Password">
+                <label for="exampleInputpassword">password</label>
+                <input type="password" class="form-control" name="password" placeholder="password">
             </div>
             <input type="submit" name="masuk" value="Masuk" class="btn btn-default">
         </form>

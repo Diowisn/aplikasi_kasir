@@ -8,10 +8,9 @@ if (isset($_SESSION['userid']))
         // redirect ke halaman kasir
         header("location:kasir.php");
     }
-}else{
+}else {
     $_SESSION['error'] = 'Anda harus login dahulu!';
-    header("location:login.php")
+    header("location:login.php");
 }
-
 
 ?>

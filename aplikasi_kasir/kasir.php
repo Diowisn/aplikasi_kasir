@@ -1,13 +1,13 @@
 <?php
 include 'config.php';
 session_start();
-include 'authchek_k.php';
+// include 'authcheck_k.php';
 
-$barang = mysqli_query($dbconnect, "select * from barang");
+$barang = mysqli_query($dbconnect, "SELECT * FROM barang");
 
 $sum = 0;
-if (isset($_SESSION['cart'])) {
-    foreach ($_SESSION['cart'] as $key => $value) {
+if (isset($_SESSION['catr'])) {
+    foreach ($_SESSION['catr'] as $key => $value) {
         $sum += $value['harga']*$value['qty'];
     }
 }
@@ -38,7 +38,7 @@ if (isset($_SESSION['cart'])) {
                     <div class="input-group">
                         <select name="id_barang" class="form-control">
                             <option value="">Pilih Barang</option>
-                            <?php while ($row = mysqli_fecth_array($barang)) {?>
+                            <?php while ($row = mysqli_fetch_array($barang)) {?>
                             <option value="<?=$row['id_barang']?>"><?=$row['nama']?></option>
                             <?php }
                             ?>
@@ -52,7 +52,7 @@ if (isset($_SESSION['cart'])) {
                     </div>
                 </form>
                 <br>
-                <form action="keranjang_update.php" method="post">
+                <form action="keranjang_UPDATE.php" method="post">
                 <table class="table table-bordered">
                     <tr>
                         <th>Nama</th>
@@ -60,15 +60,15 @@ if (isset($_SESSION['cart'])) {
                         <th>Qty</th>
                         <th>Sub Total</th>
                     </tr>
-                    <?php foreach ($_SESSION['cart'] as $key => $value) { ?>
+                    <?php 
+                    foreach ($_SESSION['catr'] as $key => $value) { ?>
                         <tr>
                             <td><?=$value['nama']?></td>
                             <td align="right"><?=number_format($value['harga'])?></td>
                             <td class="col-md-2"><input type="number" name="qty[]" value="<?=$value['qty']?>" class="form-control"></td>
                             <td align="right"><?=number_format($value['qty']*$value['harga'])?></td>
 
-                            <td><a href="keranjang_hapus.php?id=<?=$value['id']?>" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>
-                            
+                            <td><a href="keranjang_hapus.php?id=<?=$value['id']?>" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>    
                         </tr>
                     <?php } 
                     ?>

@@ -5,8 +5,8 @@ include 'authcheck_k.php';
 
 $id_trx = $_GET['idtrx'];
 
-$data = mysqli_query($dbconnect, "select * from transaksi where id_transaksi='idtrx'");
-$trx = mysqli_fecth_assoc($data);
+$data = mysqli_query($dbconnect, "SELECTS * FROM transaksi WHERE id_transaksi='idtrx'");
+$trx = mysqli_fetch_assoc($data);
 
 ?>
 

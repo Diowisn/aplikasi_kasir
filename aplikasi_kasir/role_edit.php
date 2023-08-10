@@ -8,7 +8,7 @@ if (isset($_POST['simpan'])) {
     $nama = $_POST['nama']; 
     
     // menyimpan data
-    mysqli_query($dbconnect, "update role set nama='$nama where id_barang='$id'");
+    mysqli_query($dbconnect, "UPDATE jabatan set nama='$nama WHERE id_barang='$id'");
 
     $_SESSION['success'] = 'Berhasil memperbaharui data!';
 
@@ -45,7 +45,7 @@ if (isset($_POST['simpan'])) {
             </div>
 
             <input type="submit" name="simpan" value="Simpan" class="btn btn-primary">
-            <a href="/barang.php" class="btn btn-warning">Kembali</a>
+            <a href="barang.php" class="btn btn-warning">Kembali</a>
         </form>        
     </div>
 </body>

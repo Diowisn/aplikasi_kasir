@@ -1,9 +1,9 @@
 <?php
 include 'config.php';
 session_start();
-include 'authcheck.php';
+// include 'authcheck.php';
 
-$view = $dbconnect->query("select * from role");
+$view = $dbconnect->query("SELECT * FROM jabatan");
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +16,6 @@ $view = $dbconnect->query("select * from role");
 </head>
 <body>
     <div class="container">
-
         <?php if (isset($_SESSION['success']) && $_SESSION['success'] !='') {?>
 
             <div class="alert alert-success" role="alert">
@@ -30,33 +29,31 @@ $view = $dbconnect->query("select * from role");
         ?>
 
         <h1>List Role</h1>
-        <a href="/role_add.php" class="btn btn-primary">Tambah Data</a>
+        <a href="role_add.php" class="btn btn-primary">Tambah Data</a>
+        <a href="index.php"><button class="btn btn-primary">Kembali</button></a>
         <table class="table table-bordered">
             <tr>
-                <th>ID Barang</th>
+                <th>ID Role</th>
                 <th>Nama</th>
-                <th>Harga</th>
-                <th>Jumlah</th>
                 <th>Aksi</th>
             </tr>
             <?php
 
-            while ($row = $view->fecth_array{}) { ?>
+            while ($row = $view->fetch_array()) { ?>
 
-            <tr>
-                <td> <?= $row['id_barang'] ?> </td>
-                <td> <?= $row['nama'] ?> </td>
-                <td> <?= $row['harga'] ?> </td>
-                <td> <?= $row['jumlah'] ?> </td>
-                <td>
-                    <a href="/barang_edit.php?id=<?=$row['id_barang']?>">Edit</a> | 
-                    <a href="/barang_hapus.php?id=<?=$row['id_barang']?>" onclick="return confirm('Apakah anda yakin untuk menghapus?')">Hapus</a>
-                </td>
-            </tr>
+                <tr>
+                    <td> <?= $row['id_role'] ?> </td>
+                    <td> <?= $row['nama'] ?> </td>
+                    <td>
+                        <a href="role_edit.php?id=<?=$row['id_role']?>">Edit</a> | 
+                        <a href="role_hapus.php?id=<?=$row['id_role']?>" onclick="return confirm('Apakah anda yakin untuk menghapus?')">Hapus</a>
+                    </td>
+                </tr>
             <?php }
             ?>
 
         </table>
+       
     </div>
 </body>
 </html>

@@ -1,11 +1,10 @@
 <?php
 include 'config.php';
 session_start();
-include 'authcheck.php';
+// include 'authcheck.php';
 
-$view = $dbconnect->query("select * from barang");
+$view = $dbconnect->query("SELECT * FROM barang");
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +29,7 @@ $view = $dbconnect->query("select * from barang");
         ?>
 
         <h1>List Barang</h1>
-        <a href="/barang_add.php" class="btn btn-primary">Tambah Data</a>
+        <a href="barang_add.php" class="btn btn-primary">Tambah Data</a>
         <table class="table table-bordered">
             <tr>
                 <th>ID Barang</th>
@@ -41,21 +40,21 @@ $view = $dbconnect->query("select * from barang");
             </tr>
             <?php
 
-            while ($row = $view->fecth_array{}) { ?>
+            while ($row = $view->fetch_array()) { ?>
 
-            <tr>
-                <td> <?= $row['id_barang'] ?> </td>
-                <td> <?= $row['nama'] ?> </td>
-                <td> <?= $row['harga'] ?> </td>
-                <td> <?= $row['jumlah'] ?> </td>
-                <td>
-                    <a href="/barang_edit.php?id=<?=$row['id_barang']?>">Edit</a> | 
-                    <a href="/barang_hapus.php?id=<?=$row['id_barang']?>" onclick="return confirm('Apakah anda yakin untuk menghapus?')">Hapus</a>
-                </td>
-            </tr>
+                <tr>
+                    <td> <?= $row['id_barang'] ?> </td>
+                    <td> <?= $row['nama'] ?> </td>
+                    <td> <?= $row['harga'] ?> </td>
+                    <td> <?= $row['jumlah'] ?> </td>
+                    <td>
+                        <a href="barang_edit.php?id=<?=$row['id_barang']?>">Edit</a> | 
+                        <a href="barang_hapus.php?id=<?=$row['id_barang']?>" onclick="return confirm('Apakah anda yakin untuk menghapus?')">Hapus</a>
+                    </td>
+                </tr>
             <?php }
             ?>
-
+            <a href="index.php"><button class="btn btn-primary">Kembali</button></a>
         </table>
     </div>
 </body>

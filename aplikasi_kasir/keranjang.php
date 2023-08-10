@@ -8,9 +8,9 @@ if (isset($_POST['id_barang']))
     $id_barang = $_POST['id_barang'];
     $qty = $_POST['qty'];
 
-    $data = mysqli_query($dbconnect, "select * from barang where id_barang='$id_barang'");
+    $data = mysqli_query($dbconnect, "SELECT * FROM barang WHERE id_barang='$id_barang'");
 
-    $b = mysqli_fecth_assoc($data);
+    $b = mysqli_fetch_assoc($data);
 
     $barang = [
         'id' => $b['id_barang'],
@@ -19,8 +19,8 @@ if (isset($_POST['id_barang']))
         'qty' => $qty
     ];
 
-    $_SESSION['cart'][]=$barang;
-    krsort($_SESSION['cart']);
+    $_SESSION['catr'][]=$barang;
+    krsort($_SESSION['catr']);
 
     header("location:kasir.php");
 }

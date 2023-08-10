@@ -5,19 +5,19 @@ include 'authcheck_k.php';
 
 $id = $_GET['id'];
 
-$cart = $_SESSION['cart'];
+$catr = $_SESSION['catr'];
 
 // mengambil data secara spesifik
-$k = array_filter($cart, function ($var) use ($id){
+$k = array_filter($catr, function ($var) use ($id){
     return ($var['id']==$id);
 });
 
-foreach ($k as key => $value) {
-    unset($_SESSION['cart'][$key]);
+foreach ($k as $key => $value) {
+    unset($_SESSION['catr'][$key]);
 }
 
 // untuk mengembalikan urutan dari data
-$_SESSION['cart'] = array_values($_SESSION['cart']);
+$_SESSION['catr'] = array_values($_SESSION['catr']);
 header("location:kasir.php");
 
 ?>

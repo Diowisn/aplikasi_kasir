@@ -1,18 +1,17 @@
 <?php
-
 include 'config.php';
-session_start();
-include 'authcheck.php';
+// session_start();
+// include 'authcheck.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
     // menampilkan data berdasarkan id 
-    $data = mysqli_query($dbconnect, "select * from barang where id_barang= '$id'");
-    $data = mysqli_fecth_assoc($data);
+    $data = mysqli_query($dbconnect, "SELECT * FROM barang WHERE id_barang= '$id'");
+    $data = mysqli_fetch_assoc($data);
 }
 
-if(isset($_POST['update'])) {
+if(isset($_POST['UPDATE'])) {
     
     $id = $_GET['id'];
 
@@ -21,9 +20,9 @@ if(isset($_POST['update'])) {
     $jumlah = $_POST['jumlah'];
     
     // menyimpan data 
-    mysqli_query($dbconnect, "update barang set nama='$nama', harga='$harga', jumlah='$jumlah' where id_barang='$id'");
+    mysqli_query($dbconnect, "UPDATE barang set nama='$nama', harga='$harga', jumlah='$jumlah' WHERE id_barang='$id'");
 
-    header("location:barang.php")
+    header("location:barang.php");
 }
 ?>
 
@@ -52,8 +51,8 @@ if(isset($_POST['update'])) {
                 <label>Jumlah Stock</label>
                 <input type="number" name="jumlah" class="form-control" placeholder="Jumlah Stock" value="<?=$data['jumlah']?>">
             </div>
-            <input type="submit" name="update" value="Perbaruhi" class="btn btn-primary">
-            <a href="/barang.php" class="btn btn-warning">Kembali</a>
+            <input type="submit" name="UPDATE" value="Perbaruhi" class="btn btn-primary">
+            <a href="barang.php" class="btn btn-warning">Kembali</a>
         </form>
     </div>
 </body>

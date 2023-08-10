@@ -1,20 +1,20 @@
 <?php
 
 include 'config.php';
-session_start();
-include 'authcheck.php';
+// session_start();
+// include 'authcheck.php';
 
-$role = mysqli_query($dbconnect, "select * from role");
+$role = mysqli_query($dbconnect, "SELECT * FROM jabatan");
 
 if (isset($_POST['simpan'])) {
 
     $nama = $_POST['nama']; 
     $username = $_POST['username']; 
-    $password = $_POST['password'];
+    $password = $_POST['sandi'];
     $role_id = $_POST['role_id'];
     
     // menyimpan data
-    mysqli_query($dbconnect, "insert into user values ('', '$nama', '$username', '$password', '$role_id')");
+    mysqli_query($dbconnect, "INSERT INTO user VALUES ('', '$nama', '$username', '$password', '$role_id')");
 
     $_SESSION['success'] = 'Berhasil menambahkan data!';
 
@@ -36,7 +36,7 @@ if (isset($_POST['simpan'])) {
 <body>
     <div class="container">
         <h1>Tambah User</h1>
-        <form action="post">
+        <form method="post">
             <div class="form-group">
                 <label for="">Nama</label>
                 <input type="text" name="nama" class="form-control" placeholder="Nama">
@@ -46,15 +46,15 @@ if (isset($_POST['simpan'])) {
                 <input type="text" name="username" class="form-control" placeholder="Username">
             </div>
             <div class="form-group">
-                <label for="">Password</label>
-                <input type="text" name="password" class="form-control" placeholder="Password">
+                <label for="">password</label>
+                <input type="text" name="password" class="form-control" placeholder="password">
             </div>
             <div class="form-group">
                 <label for="">Role Akses</label>
                 <select name="role_id" class="form-control">
                     <option value="">Pilih Role Akses</option>
 
-                <?php while ($row = mysqli_fecth_array($role)) {?>
+                <?php while ($row = mysqli_fetch_array($role)) {?>
                     <option value="<?=$row['id_role']?>"><?=$row['nama']?></option>
                     <?php
                     } ?>
@@ -63,7 +63,7 @@ if (isset($_POST['simpan'])) {
             </div>
 
             <input type="submit" name="simpan" value="Simpan" class="btn btn-primary">
-            <a href="/user.php" class="btn btn-warning">Kembali</a>
+            <a href="user.php" class="btn btn-warning">Kembali</a>
         </form>        
     </div>
 </body>

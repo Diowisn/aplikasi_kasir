@@ -1,30 +1,30 @@
 <?php
 
 include 'config.php';
-session_start();
-include 'authcheck.php';
+// session_start();
+// include 'authcheck.php';
 
-$role = mysqli_query($dbconnect, "select * from role");
+$role = mysqli_query($dbconnect, "SELECT * FROM jabatan");
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
     // menampilkan data berdasarkan id 
-    $data = mysqli_query($dbconnect, "select * from user where id_user= '$id'");
-    $data = mysqli_fecth_assoc($data);
+    $data = mysqli_query($dbconnect, "SELECT * FROM user WHERE id_user= '$id'");
+    $data = mysqli_fetch_assoc($data);
 }
 
-if (isset($_POST['update'])) {
+if (isset($_POST['UPDATE'])) {
 
     $id = $_GET['id'];
 
     $nama = $_POST['nama']; 
     $username = $_POST['username']; 
-    $password = $_POST['password'];
+    $password = $_POST['sandi'];
     $role_id = $_POST['role_id'];
     
     // menyimpan data
-    mysqli_query($dbconnect, "update user set nama='$nama', username='$username', password='$password', role_id='$role_id' where id_user='$id'");
+    mysqli_query($dbconnect, "UPDATE user SET nama='$nama', username='$username', sandi='$password', role_id='$role_id' WHERE id_user='$id'");
 
     $_SESSION['success'] = 'Berhasil memperbaharui data!';
 
@@ -46,34 +46,34 @@ if (isset($_POST['update'])) {
 <body>
     <div class="container">
         <h1>Tambah User</h1>
-        <form action="post">
+        <form method="post">
             <div class="form-group">
                 <label for="">Nama</label>
-                <input type="text" name="nama" class="form-control" placeholder="Nama">
+                <input type="text" name="nama" class="form-control" placeholder="Nama" value="<?=$data['nama']?>">
             </div>
             <div class="form-group">
                 <label for="">Username</label>
-                <input type="text" name="username" class="form-control" placeholder="Username">
+                <input type="text" name="username" class="form-control" placeholder="Username" value="<?=$data['username']?>">
             </div>
             <div class="form-group">
-                <label for="">Password</label>
-                <input type="text" name="password" class="form-control" placeholder="Password">
+                <label for="">password</label>
+                <input type="text" name="sandi" class="form-control" placeholder="password" value="<?=$data['sandi']?>">
             </div>
             <div class="form-group">
                 <label for="">Role Akses</label>
                 <select name="role_id" class="form-control">
                     <option value="">Pilih Role Akses</option>
 
-                <?php while ($row = mysqli_fecth_array($role)) {?>
-                    <option value="<?=$row['id_role']?>"> <?=$row['id_role']==$data['role_id']?'selected':''?> ><?=$row['nama']?></option>
-                    <?php
+                    <?php while ($row = mysqli_fetch_array($role)) {?>
+                        <option value="<?=$row['id_role']?>"> <?=$row['id_role']==$data['role_id']?'selected':''?><?=$row['nama']?></option>
+                        <?php
                     } ?>
 
                 </select>
             </div>
 
             <input type="submit" name="simpan" value="Simpan" class="btn btn-primary">
-            <a href="/user.php" class="btn btn-warning">Kembali</a>
+            <a href="user.php" class="btn btn-warning">Kembali</a>
         </form>        
     </div>
 </body>

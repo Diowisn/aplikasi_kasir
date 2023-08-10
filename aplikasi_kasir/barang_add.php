@@ -1,8 +1,7 @@
 <?php
-
 include 'config.php';
-session_start();
-include 'authcheck.php';
+// session_start();
+// include 'authcheck.php';
 
 if (isset($_POST['simpan'])) {
 
@@ -11,9 +10,9 @@ if (isset($_POST['simpan'])) {
     $jumlah = $_POST['jumlah'];
     
     // menyimpan data
-    mysqli_query($dbconnect, "insert into barang values ('', '$nama', '$harga', '$jumlah')");
+    mysqli_query($dbconnect, "INSERT INTO barang VALUES ('', '$nama', '$harga', '$jumlah')");
 
-    $_SESSION['success'] = 'Berhasil menambahkan';
+    $_SESSION['success'] = 'Berhasil menambahkan barang!';
 
     // kembali ke list barang 
     header("location: barang.php");
@@ -33,7 +32,7 @@ if (isset($_POST['simpan'])) {
 <body>
     <div class="container">
         <h1>Tambah Barang</h1>
-        <form action="post">
+        <form method="POST">
             <div class="form-group">
                 <label for="">Nama Barang</label>
                 <input type="text" name="nama" class="form-control" placeholder="Nama Barang">
@@ -48,7 +47,7 @@ if (isset($_POST['simpan'])) {
             </div>
 
             <input type="submit" name="simpan" value="Simpan" class="btn btn-primary">
-            <a href="/barang.php" class="btn btn-warning">Kembali</a>
+            <a href="barang.php" class="btn btn-warning">Kembali</a>
         </form>        
     </div>
 </body>

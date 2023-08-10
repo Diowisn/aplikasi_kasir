@@ -1,13 +1,14 @@
 <?php
-$host = "localhost";
-$user = "root";
+$localhost = "localhost";
+$username = "root";
 $pass = "";
-$db = "aplikasi_kasir";
+$database = "aplikasi_kasir";
 
-$dbconnect = new mysql ("$host", "$user", "$pass", "$db");
+$dbconnect = new mysqli ("$localhost", "$username", "$pass", "$database");
 
-if($dbconnect -> connect_error)
-{
-    echo "Koneksi gagal -> " $dbconnect->connect_error;
+if(mysqli_connect_errno()) {
+
+    echo "Koneksi gagal -> " . mysqli_connect_errno();
 }
+
 ?>

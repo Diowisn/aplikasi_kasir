@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 
 if (isset($_SESSION['userid'])) 
 {
@@ -10,7 +10,7 @@ if (isset($_SESSION['userid']))
     }
 }else{
     $_SESSION['error'] = 'Anda harus login dahulu!';
-    header("location:login.php")
+    header("location:login.php");
 }
 
 ?>
